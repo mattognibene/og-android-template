@@ -1,0 +1,76 @@
+import dependencies.Config
+import dependencies.Libraries
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Config.compileSdk
+    buildToolsVersion Config.buildTools
+
+    defaultConfig {
+        minSdkVersion Config.minSdk
+        targetSdkVersion Config.targetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+
+    }
+
+    testOptions {
+        reportDir "$rootDir/reports/remote"
+    }
+}
+
+dependencies {
+    implementation Libraries.kotlinStdlib
+    implementation Libraries.androidxAppCompat
+    implementation Libraries.androidxCore
+    testImplementation Libraries.junit
+    androidTestImplementation Libraries.androidxTestExtJUnit
+    androidTestImplementation Libraries.androidxEspressoCore
+
+    // Dagger
+    implementation Libraries.dagger
+    kapt Libraries.daggerCompiler
+
+    // Coroutines
+    implementation Libraries.coroutinesCore
+    implementation Libraries.coroutinesAndroid
+
+    // OkHttp
+    api Libraries.okhttp
+    api Libraries.okhttpLogging
+
+    // Retrofit
+    api Libraries.retrofit
+    api Libraries.retrofitRxJavaAdapter
+    api Libraries.retrofitMoshiConverter
+
+    // Moshi
+    implementation Libraries.moshi
+
+    // Timber
+    implementation Libraries.timber
+
+    testImplementation Libraries.androidxTestExtJUnit
+    testImplementation Libraries.androidxTestExtTruth
+}

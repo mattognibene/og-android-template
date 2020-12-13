@@ -1,0 +1,23 @@
+import dependencies.Libraries
+
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+
+dependencies {
+    implementation Libraries.kotlinStdlib
+
+    // Dagger
+    implementation Libraries.dagger
+    kapt Libraries.daggerCompiler
+
+    // Coroutines
+    implementation Libraries.coroutinesCore
+    implementation Libraries.coroutinesAndroid
+
+    // Rx
+    implementation Libraries.rxJava
+
+}
+

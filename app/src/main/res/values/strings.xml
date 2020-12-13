@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Hermes</string>
+
+    <!--Menu-->
+    <string name="activities">Activities</string>
+    <string name="go">Go</string>
+    <string name="calendar">Calendar</string>
+
+</resources>

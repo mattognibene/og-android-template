@@ -1,0 +1,69 @@
+import dependencies.Libraries
+import dependencies.Config
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Config.compileSdk
+    buildToolsVersion Config.buildTools
+
+    defaultConfig {
+        minSdkVersion Config.minSdk
+        targetSdkVersion Config.targetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+
+    }
+
+    testOptions {
+        reportDir "$rootDir/reports/cache"
+    }
+}
+
+dependencies {
+    // Testing
+    androidTestImplementation Libraries.androidxEspressoCore
+    androidTestImplementation Libraries.androidxEspressoContrib
+    androidTestImplementation Libraries.androidxTestRules
+    androidTestImplementation Libraries.androidxTestRunner
+    androidTestImplementation Libraries.androidxRoomTest
+
+    // Support Database
+    implementation Libraries.androidxSqlite
+
+    // Dagger
+    implementation Libraries.dagger
+    kapt Libraries.daggerCompiler
+
+    // Room
+    api Libraries.androidxRoom
+    kapt Libraries.androidxRoomCompiler
+    api Libraries.androidxRoomRxJava
+
+    implementation Libraries.androidxAnnotations
+    implementation Libraries.kotlinStdlib
+    implementation Libraries.rxJava
+
+    testImplementation Libraries.androidxTestExtJUnit
+    testImplementation Libraries.androidxTestExtTruth
+}

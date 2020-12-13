@@ -1,0 +1,69 @@
+import dependencies.Config
+import dependencies.Libraries
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Config.compileSdk
+    buildToolsVersion Config.buildTools
+
+    defaultConfig {
+        minSdkVersion Config.minSdk
+        targetSdkVersion Config.targetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+
+    }
+
+    testOptions {
+        reportDir "$rootDir/reports/data"
+    }
+}
+
+dependencies {
+    implementation project(":domain")
+    api project(':cache')
+    api project(':remote')
+
+    // Android
+    implementation Libraries.androidxAnnotations
+
+    // Kotlin
+    implementation Libraries.kotlinStdlib
+
+    // Rx
+    implementation Libraries.rxJava
+    implementation Libraries.rxAndroid
+
+    testImplementation Libraries.androidxTestExtJUnit
+    testImplementation Libraries.androidxTestExtTruth
+
+    // Coroutines
+    implementation Libraries.coroutinesCore
+    implementation Libraries.coroutinesAndroid
+
+    implementation Libraries.dagger
+    kapt Libraries.daggerCompiler
+    implementation Libraries.daggerSupport
+    kapt Libraries.daggerProcessor
+}

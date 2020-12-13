@@ -1,0 +1,106 @@
+import dependencies.Libraries
+import dependencies.Config
+
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    compileSdkVersion Config.compileSdk
+    buildToolsVersion Config.buildTools
+
+    defaultConfig {
+        applicationId "com.hermestraining.hermes"
+        minSdkVersion Config.minSdk
+        targetSdkVersion Config.targetSdk
+        versionCode Config.code
+        versionName Config.name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+    }
+
+    signingConfigs {
+        develop {
+            storeFile file("${project.rootDir}/keystores/hermesDevelop.jks")
+            storePassword propOrEmpty('STORE_PASSWORD')
+            keyAlias 'hermesDevelop'
+            keyPassword propOrEmpty('KEY_PASSWORD')
+        }
+
+        production {
+            storeFile file('${project.rootDir}/keystores/hermesProduction.jks')
+            storePassword propOrEmpty('STORE_PASSWORD')
+            keyAlias 'hermesProduction'
+            keyPassword propOrEmpty('KEY_PASSWORD')
+        }
+    }
+
+    flavorDimensions "env"
+
+    productFlavors {
+        develop {
+            dimension "env"
+            applicationIdSuffix ".develop"
+            signingConfig signingConfigs.develop
+        }
+        production {
+            dimension "env"
+            signingConfig signingConfigs.production
+        }
+    }
+
+}
+
+dependencies {
+    androidTestImplementation Libraries.androidxEspressoCore
+    androidTestImplementation Libraries.androidxEspressoContrib
+    androidTestImplementation Libraries.androidxTestRules
+    androidTestImplementation Libraries.androidxTestRunner
+    androidTestImplementation Libraries.androidxTestExtJUnit
+
+    implementation project(':common')
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':device')
+
+    implementation Libraries.kotlinStdlib
+    implementation Libraries.androidxCore
+    implementation Libraries.androidxAnnotations
+    implementation Libraries.materialComponents
+    implementation Libraries.androidxConstraintLayout
+    implementation Libraries.androidxLifecycleExt
+
+    // Coroutines
+    implementation Libraries.coroutinesCore
+    implementation Libraries.coroutinesAndroid
+
+    implementation Libraries.dagger
+    kapt Libraries.daggerCompiler
+    implementation Libraries.daggerSupport
+    kapt Libraries.daggerProcessor
+
+    implementation Libraries.timber
+
+    testImplementation Libraries.androidxTestExtJUnit
+    testImplementation Libraries.androidxTestExtTruth
+}
