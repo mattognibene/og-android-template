@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.common.AppBindings
 import com.example.common.ViewModelModule
 import com.example.data.injection.DataModule
-import com.example.hermes.BuildTypeModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
