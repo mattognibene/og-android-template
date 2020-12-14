@@ -1,4 +1,4 @@
-package com.hermestraining.hermes
+package com.example
 
 import android.os.StrictMode
 import dagger.Module
