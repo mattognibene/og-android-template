@@ -12,6 +12,6 @@ object DatabaseModule {
     @Singleton
     @JvmStatic
     fun providesDatabase(app: Application): AppDatabase {
-        return Room.databaseBuilder(app, AppDatabase::class.java, "HermesTraining-db").build()
+        return Room.databaseBuilder(app, AppDatabase::class.java, "Example-db").build()
     }
 }
