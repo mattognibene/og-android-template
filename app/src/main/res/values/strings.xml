@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hermes</string>
+    <string name="app_name">Example</string>
 
     <!--Menu-->
     <string name="activities">Activities</string>

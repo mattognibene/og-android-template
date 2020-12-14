@@ -18,7 +18,7 @@ android {
     buildToolsVersion Config.buildTools
 
     defaultConfig {
-        applicationId "com.hermestraining.hermes"
+        applicationId "com.example"
         minSdkVersion Config.minSdk
         targetSdkVersion Config.targetSdk
         versionCode Config.code
@@ -41,16 +41,16 @@ android {
 
     signingConfigs {
         develop {
-            storeFile file("${project.rootDir}/keystores/hermesDevelop.jks")
+            storeFile file("${project.rootDir}/keystores/exampleDevelop.jks")
             storePassword propOrEmpty('STORE_PASSWORD')
-            keyAlias 'hermesDevelop'
+            keyAlias 'exampleDevelop'
             keyPassword propOrEmpty('KEY_PASSWORD')
         }
 
         production {
-            storeFile file('${project.rootDir}/keystores/hermesProduction.jks')
+            storeFile file('${project.rootDir}/keystores/exampleProduction.jks')
             storePassword propOrEmpty('STORE_PASSWORD')
-            keyAlias 'hermesProduction'
+            keyAlias 'exampleProduction'
             keyPassword propOrEmpty('KEY_PASSWORD')
         }
     }
