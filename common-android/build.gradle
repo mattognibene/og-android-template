@@ -43,6 +43,7 @@ dependencies {
     implementation Libraries.kotlinStdlib
     implementation Libraries.androidxAppCompat
     implementation Libraries.androidxCore
+    implementation Libraries.androidxRecyclerView
     testImplementation Libraries.junit
     androidTestImplementation Libraries.androidxTestExtJUnit
     androidTestImplementation Libraries.androidxEspressoCore
